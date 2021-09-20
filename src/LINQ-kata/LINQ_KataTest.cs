@@ -21,6 +21,20 @@ public class LINQ_KataTest
 	{
 		Assert.AreEqual(new[] { 1, 4, 9, 16, 25, 36 }, LINQ_Kata.CalculateSquares(1, 6));
 	}
+	[Test]
+	public void ReplaceTest()
+	{
+		Assert.AreEqual("H!!", LINQ_Kata.Replace("Hi!"));
+		Assert.AreEqual("!H!! H!!", LINQ_Kata.Replace("!Hi! Hi!"));
+		Assert.AreEqual("!!!!!", LINQ_Kata.Replace("aeiou"));
+		Assert.AreEqual("!BCD!", LINQ_Kata.Replace("ABCDE"));
+	}	
+	[Test]
+	public void SquareDigitsTest()
+	{
+		Assert.AreEqual(811181, LINQ_Kata.SquareDigits(9119));
+		Assert.AreEqual(0, LINQ_Kata.SquareDigits(0));
+	}
 
 	[TestCase("for")]
 	[TestCase("while")]
@@ -42,7 +56,7 @@ public class LINQ_KataTest
 				}
 				record = reader.ReadLine();
 			}
-			Assert.IsTrue(true);
+			Assert.Pass("");
 		}
 		finally
 		{

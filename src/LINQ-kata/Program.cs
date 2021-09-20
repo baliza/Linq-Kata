@@ -16,6 +16,9 @@ namespace LINQ_kata
 			t.CalculateSquaresTest();
 			t.CountOccurencesOfCharacterTest();
 			t.SumOfArrayTest();
+			t.ReplaceTest();
+			t.SquareDigitsTest();
+
 		}
 	}
 
