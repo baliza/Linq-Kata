@@ -56,7 +56,7 @@ public class LINQ_KataTest
 				}
 				record = reader.ReadLine();
 			}
-			Assert.Pass("");
+			Assert.IsTrue(true);
 		}
 		finally
 		{

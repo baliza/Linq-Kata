@@ -1,66 +1,46 @@
-﻿using System;
+﻿using System.Linq;
 
 public class LINQ_Kata
 {
 	public static int Sum(int[] integers)
 	{
-		var sum = 0;
-		foreach (var i in integers)
-		{
-			sum += i;
-		}
-		return sum;
+		return integers.Sum(i => i);
 	}
 
 	public static int CountChar(char[] chars, char charToCount)
 	{
-		var occurences = 0;
-		foreach (var c in chars)
-		{
-			if (c == charToCount)
-				occurences++;
-		}
-		return occurences;
+		return chars.Count(c => c == charToCount);
 	}
 
 	public static int[] CalculateSquares(int start, int end)
 	{
-		var result = new int[end - start + 1];
-		for (var i = start; i <= end; i++)
-		{
-			result[i - start] = i * i;
-		}
-		return result;
+		var list = Enumerable.Range(start, end);
+		var result = list.Select(i => i * i);
+		return result.ToArray();
 	}
 
 	public static int SquareDigits(int n)
 	{
 		string digits = n.ToString();
-		string result = "";
-
-		foreach (char character in digits)
-		{
-			int number = Convert.ToInt32(character.ToString());
-			int square = number * number;
-			result += square;
-		}
+		var result = digits.Select(Pow).Aggregate((x, y) => x + y);
 		return int.Parse(result);
+	}
+
+	private static string Pow(char character)
+	{
+		var number = char.GetNumericValue(character);
+		var square = number * number;
+		return square.ToString();
 	}
 
 	public static string Replace(string s)
 	{
-		char[] result = new char[s.Length];
-		for (var i = 0; i < s.Length; i++)
-		{
-			if (s[i] == 'a' || s[i] == 'A' ||
-				s[i] == 'e' || s[i] == 'E' ||
-				s[i] == 'i' || s[i] == 'I' ||
-				s[i] == 'o' || s[i] == 'O' ||
-				s[i] == 'u' || s[i] == 'U')
-				result[i] = '!';
-			else
-				result[i] = s[i];
-		}
-		return new string(result);
+		var chars = s.Select(ReplaceVowels).ToArray();
+		return new string(chars);
+	}
+
+	private static char ReplaceVowels(char c)
+	{
+		return "aeiouAEIOU".Contains(c) ? '!' : c;
 	}
 }
